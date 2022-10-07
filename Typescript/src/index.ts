@@ -28,12 +28,8 @@ type OrderWork = {
   today: Date;
 };
 
-function newOrder(today: Date): OrderWork {
-  return { decoratingDays: 0, bakingDays: 0, today, boxingDays: 0 };
-}
-
-export function orderDue(order: Order): DateString {
-  const work: OrderWork = newOrder(new Date(order.placed));
+function newOrder(today: Date, order: Order): OrderWork {
+  const work = { decoratingDays: 0, bakingDays: 0, today, boxingDays: 0 };
   work.bakingDays += {
     small: 2,
     big: 3,
@@ -47,6 +43,11 @@ export function orderDue(order: Order): DateString {
   if (order.frosting) {
     work.decoratingDays += 2;
   }
+  return work;
+}
+
+export function orderDue(order: Order): DateString {
+  const work: OrderWork = newOrder(new Date(order.placed), order);
   const weekendDays = 2;
   const MarcoWorkDays = [1, 2, 3, 4, 5];
   const SandroWorkDays = [2, 3, 4, 5, 6];
