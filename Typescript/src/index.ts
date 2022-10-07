@@ -48,13 +48,20 @@ function newOrder(today: Date, order: Order): OrderWork {
 
 export function orderDue(order: Order): DateString {
   const work: OrderWork = newOrder(new Date(order.placed), order);
+
+  doWork(work);
+
+  return formatDate(work.today);
+}
+
+function doWork(work: OrderWork) {
   const weekendDays = 2;
   const MarcoWorkDays = [1, 2, 3, 4, 5];
   const SandroWorkDays = [2, 3, 4, 5, 6];
-
   const addWork = (days: number) => {
     work.today = addDays(work.today, days);
   };
+
   addWork(work.bakingDays);
   if (!MarcoWorkDays.includes(work.today.getDay())) {
     addWork(weekendDays);
@@ -71,6 +78,4 @@ export function orderDue(order: Order): DateString {
   if (extraWaitForBox > 0) {
     addWork(extraWaitForBox);
   }
-
-  return formatDate(work.today);
 }
