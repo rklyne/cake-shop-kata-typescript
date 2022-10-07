@@ -20,6 +20,7 @@ function addDays(date: Date, days: number): Date {
 }
 
 export function deliveryDate(size: Size, date: string): DateString {
+  return orderDue({ placed: date, morning: false, size });
   const bakingDays = {
     small: 2,
     big: 3,
@@ -36,7 +37,20 @@ export function deliveryDate(size: Size, date: string): DateString {
 }
 
 export function orderDue(order: Order): DateString {
+  const bakingDays = {
+    small: 2,
+    big: 3,
+  }[order.size];
   if (order.morning) {
     return "2022-10-11";
   }
+  const weekendDays = 2;
+  const MarcoWorkDays = [1, 2, 3, 4, 5];
+
+  let bakedDate = addDays(new Date(order.placed), bakingDays);
+  if (!MarcoWorkDays.includes(bakedDate.getDay())) {
+    bakedDate = addDays(bakedDate, weekendDays);
+  }
+
+  return formatDate(bakedDate);
 }
