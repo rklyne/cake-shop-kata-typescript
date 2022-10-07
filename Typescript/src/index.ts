@@ -22,14 +22,6 @@ function addDays(date: Date, days: number): Date {
   return new Date(date.getTime() + days * day);
 }
 
-type OrderWork = {
-  decoratingDays: number;
-  bakingDays: number;
-  boxingDays: number;
-  nutsDays: number;
-  today: Date;
-};
-
 export function orderDue(order: Order): DateString {
   const work = new BakingProgress(new Date(order.placed), order);
 
@@ -43,6 +35,7 @@ class BakingProgress {
   private bakingDays = 0;
   private boxingDays = 0;
   private nutsDays = 0;
+
   constructor(private today: Date, order: Order) {
     this.bakingDays += {
       small: 2,
