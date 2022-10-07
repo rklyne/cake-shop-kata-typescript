@@ -52,22 +52,22 @@ export function orderDue(order: Order): DateString {
   const MarcoWorkDays = [1, 2, 3, 4, 5];
   const SandroWorkDays = [2, 3, 4, 5, 6];
 
-  let bakedDate = addDays(work.today, work.bakingDays);
-  if (!MarcoWorkDays.includes(bakedDate.getDay())) {
-    bakedDate = addDays(bakedDate, weekendDays);
+  let deliveryDate = addDays(work.today, work.bakingDays);
+  if (!MarcoWorkDays.includes(deliveryDate.getDay())) {
+    deliveryDate = addDays(deliveryDate, weekendDays);
   }
   if (work.decoratingDays) {
-    bakedDate = addDays(bakedDate, work.decoratingDays);
-    if (!SandroWorkDays.includes(bakedDate.getDay())) {
-      bakedDate = addDays(bakedDate, weekendDays);
+    deliveryDate = addDays(deliveryDate, work.decoratingDays);
+    if (!SandroWorkDays.includes(deliveryDate.getDay())) {
+      deliveryDate = addDays(deliveryDate, weekendDays);
     }
   }
 
   const extraWaitForBox =
     work.boxingDays - (work.bakingDays + work.decoratingDays);
   if (extraWaitForBox > 0) {
-    bakedDate = addDays(bakedDate, extraWaitForBox);
+    deliveryDate = addDays(deliveryDate, extraWaitForBox);
   }
 
-  return formatDate(bakedDate);
+  return formatDate(deliveryDate);
 }
