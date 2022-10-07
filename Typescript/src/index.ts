@@ -12,7 +12,7 @@ function addDays(date: Date, days: number): Date {
 
 export function deliveryDate(size: Size, date: string) {
   size;
-  const weekends = [6, ];
+  const weekends = [6, 0];
 
   let bakedDate = addDays(new Date(date), 2);
   if (weekends.includes(bakedDate.getDay())) {
