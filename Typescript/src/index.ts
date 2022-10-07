@@ -75,14 +75,6 @@ function subtractOneDayWork(work: OrderWork) {
 }
 
 function doWork(work: OrderWork) {
-  const weekendDays = 2;
-  const MarcoWorkDays = [1, 2, 3, 4, 5];
-  const SandroWorkDays = [2, 3, 4, 5, 6];
-  const addWork = (days: number) => {
-    work.today = addDays(work.today, days);
-  };
-
-
   const workIsDone = () => {
     return !(work.bakingDays || work.boxingDays || work.decoratingDays)
   }
