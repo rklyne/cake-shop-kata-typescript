@@ -14,5 +14,5 @@ export function deliveryDate(size: Size, date: string) {
   size;
   const delivery = new Date(date);
 
-  return formatDate(addDays(delivery, 2))
+  return formatDate(addDays(delivery, 2));
 }
