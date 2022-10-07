@@ -47,4 +47,15 @@ describe("orders in the morning start same day", () => {
     };
     expect(orderDue(order)).toBe(Tuesday);
   });
+
+  test("big cakes ready in 2 days", () => {
+    const Monday = "2022-10-10";
+    const Wednesday = "2022-10-12";
+    const order = {
+      size: BIG,
+      placed: Monday,
+      morning: true,
+    };
+    expect(orderDue(order)).toBe(Wednesday);
+  });
 });
