@@ -19,30 +19,13 @@ function addDays(date: Date, days: number): Date {
   return new Date(date.getTime() + days * day);
 }
 
-export function deliveryDate(size: Size, date: string): DateString {
-  return orderDue({ placed: date, morning: false, size });
-  const bakingDays = {
-    small: 2,
-    big: 3,
-  }[size];
-  const weekendDays = 2;
-  const MarcoWorkDays = [1, 2, 3, 4, 5];
-
-  let bakedDate = addDays(new Date(date), bakingDays);
-  if (!MarcoWorkDays.includes(bakedDate.getDay())) {
-    bakedDate = addDays(bakedDate, weekendDays);
-  }
-
-  return formatDate(bakedDate);
-}
-
 export function orderDue(order: Order): DateString {
   let bakingDays = {
     small: 2,
     big: 3,
   }[order.size];
   if (order.morning) {
-    bakingDays -= 1
+    bakingDays -= 1;
   }
   const weekendDays = 2;
   const MarcoWorkDays = [1, 2, 3, 4, 5];
