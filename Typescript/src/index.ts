@@ -58,6 +58,7 @@ function subtractOneDayWork(work: OrderWork) {
   const MarcoWorkDays = [1, 2, 3, 4, 5];
   const SandroWorkDays = [2, 3, 4, 5, 6];
 
+  work.today = addDays(work.today, 1);
   if (work.bakingDays) {
     if (MarcoWorkDays.includes(work.today.getDay())) {
       work.bakingDays -= 1;
@@ -71,7 +72,6 @@ function subtractOneDayWork(work: OrderWork) {
   if (work.boxingDays) {
     work.boxingDays -= 1;
   }
-  work.today = addDays(work.today, 1);
 }
 
 function doWork(work: OrderWork) {
@@ -82,22 +82,14 @@ function doWork(work: OrderWork) {
     work.today = addDays(work.today, days);
   };
 
-  subtractOneDayWork(work);
 
-  addWork(work.bakingDays);
-  if (!MarcoWorkDays.includes(work.today.getDay())) {
-    addWork(weekendDays);
-  }
-  if (work.decoratingDays) {
-    addWork(work.decoratingDays);
-    if (!SandroWorkDays.includes(work.today.getDay())) {
-      addWork(weekendDays);
-    }
+  const workIsDone = () => {
+    return !(work.bakingDays || work.boxingDays || work.decoratingDays)
   }
 
-  const extraWaitForBox =
-    work.boxingDays - (work.bakingDays + work.decoratingDays);
-  if (extraWaitForBox > 0) {
-    addWork(extraWaitForBox);
+  while(!workIsDone()) {
+    subtractOneDayWork(work);
   }
+
+  return formatDate(work.today);
 }
