@@ -54,6 +54,26 @@ export function orderDue(order: Order): DateString {
   return formatDate(work.today);
 }
 
+function subtractOneDayWork(work: OrderWork) {
+  const MarcoWorkDays = [1, 2, 3, 4, 5];
+  const SandroWorkDays = [2, 3, 4, 5, 6];
+
+  if (work.bakingDays) {
+    if (MarcoWorkDays.includes(work.today.getDay())) {
+      work.bakingDays -= 1;
+    }
+  } else if (work.decoratingDays) {
+    if (SandroWorkDays.includes(work.today.getDay())) {
+      work.decoratingDays -= 1;
+    }
+  }
+
+  if (work.boxingDays) {
+    work.boxingDays -= 1;
+  }
+  work.today = addDays(work.today, 1);
+}
+
 function doWork(work: OrderWork) {
   const weekendDays = 2;
   const MarcoWorkDays = [1, 2, 3, 4, 5];
@@ -61,6 +81,8 @@ function doWork(work: OrderWork) {
   const addWork = (days: number) => {
     work.today = addDays(work.today, days);
   };
+
+  subtractOneDayWork(work);
 
   addWork(work.bakingDays);
   if (!MarcoWorkDays.includes(work.today.getDay())) {
