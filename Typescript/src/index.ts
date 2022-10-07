@@ -37,12 +37,12 @@ export function deliveryDate(size: Size, date: string): DateString {
 }
 
 export function orderDue(order: Order): DateString {
-  const bakingDays = {
+  let bakingDays = {
     small: 2,
     big: 3,
   }[order.size];
   if (order.morning) {
-    return "2022-10-11";
+    bakingDays -= 1
   }
   const weekendDays = 2;
   const MarcoWorkDays = [1, 2, 3, 4, 5];
