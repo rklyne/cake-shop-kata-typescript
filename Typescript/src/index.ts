@@ -61,8 +61,9 @@ export function orderDue(order: Order): DateString {
       bakedDate = addDays(bakedDate, weekendDays);
     }
   }
-  if (work.boxingDays > work.bakingDays) {
-    bakedDate = addDays(bakedDate, work.boxingDays - work.bakingDays);
+
+  if (work.boxingDays > (work.bakingDays + work.decoratingDays)) {
+    bakedDate = addDays(bakedDate, work.boxingDays - (work.bakingDays + work.decoratingDays));
   }
 
   return formatDate(bakedDate);
