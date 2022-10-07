@@ -47,7 +47,7 @@ export function orderDue(order: Order): DateString {
   }
   if (work.decoratingDays) {
     bakedDate = addDays(bakedDate, work.decoratingDays);
-    if (order.frosting && !SandroWorkDays.includes(bakedDate.getDay())) {
+    if (!SandroWorkDays.includes(bakedDate.getDay())) {
       bakedDate = addDays(bakedDate, weekendDays);
     }
   }
