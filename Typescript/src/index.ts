@@ -6,8 +6,9 @@ type DateString = string;
 type Order = {
   size: Size;
   placed: DateString;
-  morning: boolean;
+  morning?: boolean;
   frosting?: boolean;
+  giftWrap?: boolean;
 };
 
 function formatDate(date: Date) {

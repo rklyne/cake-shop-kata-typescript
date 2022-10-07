@@ -95,3 +95,11 @@ describe("custom frosting takes 2 days", () => {
     });
   });
 });
+
+test("a small gift wrapped cake ordered Monday is delivered on Thursday", () => {
+  const Monday = "2022-10-10";
+  const Thursday = "2022-10-13";
+  expect(orderDue({ placed: Monday, size: SMALL, giftWrap: true })).toBe(
+    Thursday
+  );
+});
