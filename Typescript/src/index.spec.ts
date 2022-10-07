@@ -79,4 +79,19 @@ describe("custom frosting takes 2 days", () => {
       })
     ).toBe(Thursday);
   });
+
+  describe("Sandro does decorations and only works Tuesday - Saturday", () => {
+    test("a small frosted cake orders on Friday morning is delivered on Wednesday", () => {
+      const Friday = "2022-10-07";
+      const Wednesday = "2022-10-12";
+      expect(
+        orderDue({
+          placed: Friday,
+          size: SMALL,
+          morning: true,
+          frosting: true,
+        })
+      ).toBe(Wednesday);
+    });
+  });
 });
