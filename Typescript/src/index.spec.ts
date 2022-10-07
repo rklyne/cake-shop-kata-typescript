@@ -1,4 +1,4 @@
-import { deliveryDate, orderDue, SMALL, BIG } from ".";
+import { BIG, SMALL, deliveryDate, orderDue } from ".";
 
 describe("one small cake", () => {
   const order = SMALL;
