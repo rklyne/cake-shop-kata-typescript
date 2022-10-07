@@ -62,7 +62,7 @@ export function orderDue(order: Order): DateString {
     }
   }
   if (work.boxingDays > work.bakingDays) {
-    bakedDate = addDays(bakedDate, 1);
+    bakedDate = addDays(bakedDate, work.boxingDays - work.bakingDays);
   }
 
   return formatDate(bakedDate);
