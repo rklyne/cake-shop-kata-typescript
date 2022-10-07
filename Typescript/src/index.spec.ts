@@ -96,10 +96,20 @@ describe("custom frosting takes 2 days", () => {
   });
 });
 
-test("a small gift wrapped cake ordered Monday is delivered on Thursday", () => {
-  const Monday = "2022-10-10";
-  const Thursday = "2022-10-13";
-  expect(orderDue({ placed: Monday, size: SMALL, giftWrap: true })).toBe(
-    Thursday
-  );
+describe("gift boxes have a 3 day lead time, independent of baking", () => {
+  test("a small gift wrapped cake ordered Monday is delivered on Thursday", () => {
+    const Monday = "2022-10-10";
+    const Thursday = "2022-10-13";
+    expect(orderDue({ placed: Monday, size: SMALL, giftWrap: true })).toBe(
+      Thursday
+    );
+  });
+
+  test("a small gift wrapped cake ordered Tuesday is delivered on Friday", () => {
+    const Tuesday = "2022-10-11";
+    const Friday = "2022-10-14";
+    expect(orderDue({ placed: Tuesday, size: SMALL, giftWrap: true })).toBe(
+      Friday
+    );
+  });
 });
