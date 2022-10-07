@@ -24,11 +24,12 @@ function addDays(date: Date, days: number): Date {
 type OrderWork = {
   decoratingDays: number;
   bakingDays: number;
+  boxingDays: number;
   today: Date;
 };
 
 function newOrder(today: Date): OrderWork {
-  return { decoratingDays: 0, bakingDays: 0, today };
+  return { decoratingDays: 0, bakingDays: 0, today, boxingDays: 0 };
 }
 
 export function orderDue(order: Order): DateString {
@@ -41,7 +42,7 @@ export function orderDue(order: Order): DateString {
     work.bakingDays -= 1;
   }
   if (order.giftWrap) {
-    return "2022-10-13";
+    work.boxingDays = 3;
   }
   if (order.frosting) {
     work.decoratingDays += 2;
@@ -59,6 +60,9 @@ export function orderDue(order: Order): DateString {
     if (!SandroWorkDays.includes(bakedDate.getDay())) {
       bakedDate = addDays(bakedDate, weekendDays);
     }
+  }
+  if (work.boxingDays > work.bakingDays) {
+    bakedDate = addDays(bakedDate, 1);
   }
 
   return formatDate(bakedDate);
