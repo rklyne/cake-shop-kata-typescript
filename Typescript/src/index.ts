@@ -62,8 +62,10 @@ export function orderDue(order: Order): DateString {
     }
   }
 
-  if (work.boxingDays > (work.bakingDays + work.decoratingDays)) {
-    bakedDate = addDays(bakedDate, work.boxingDays - (work.bakingDays + work.decoratingDays));
+  const extraWaitForBox =
+    work.boxingDays - (work.bakingDays + work.decoratingDays);
+  if (extraWaitForBox > 0) {
+    bakedDate = addDays(bakedDate, extraWaitForBox);
   }
 
   return formatDate(bakedDate);
