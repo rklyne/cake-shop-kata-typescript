@@ -28,6 +28,9 @@ export function orderDue(order: Order): DateString {
   if (order.morning) {
     bakingDays -= 1;
   }
+  if (order.frosting) {
+    bakingDays += 2;
+  }
   const weekendDays = 2;
   const MarcoWorkDays = [1, 2, 3, 4, 5];
 
