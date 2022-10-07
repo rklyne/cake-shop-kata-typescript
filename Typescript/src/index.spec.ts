@@ -26,4 +26,11 @@ test("marco only bakes Monday - Friday", () => {
   const Friday = "2022-10-07";
   const Tuesday = "2022-10-11";
   expect(deliveryDate("small", Friday)).toBe(Tuesday);
-})
+});
+
+test("big cakes take 3 days", () => {
+  const Monday = "2022-10-10";
+  const Thursday = "2022-10-13";
+  const order = "big";
+  expect(deliveryDate(order, Monday)).toBe(Thursday);
+});
