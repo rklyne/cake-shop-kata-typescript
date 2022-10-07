@@ -19,8 +19,8 @@ describe("one small cake", () => {
 });
 
 test("marco only bakes Monday - Friday", () => {
-  const Monday = "2022-10-10";
   const Thursday = "2022-10-06";
+  const Monday = "2022-10-10";
 
   expect(deliveryDate("small", Thursday)).toBe(Monday);
 })
