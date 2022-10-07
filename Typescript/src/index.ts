@@ -23,14 +23,15 @@ function addDays(date: Date, days: number): Date {
 type OrderWork = {
   decoratingDays: number;
   bakingDays: number;
+  today: Date;
 };
 
-function newOrder(): OrderWork {
-  return { decoratingDays: 0, bakingDays: 0 };
+function newOrder(today: Date): OrderWork {
+  return { decoratingDays: 0, bakingDays: 0, today };
 }
 
 export function orderDue(order: Order): DateString {
-  const work: OrderWork = newOrder();
+  const work: OrderWork = newOrder(new Date(order.placed));
   work.bakingDays += {
     small: 2,
     big: 3,
@@ -45,7 +46,7 @@ export function orderDue(order: Order): DateString {
   const MarcoWorkDays = [1, 2, 3, 4, 5];
   const SandroWorkDays = [2, 3, 4, 5, 6];
 
-  let bakedDate = addDays(new Date(order.placed), work.bakingDays);
+  let bakedDate = addDays(work.today, work.bakingDays);
   if (!MarcoWorkDays.includes(bakedDate.getDay())) {
     bakedDate = addDays(bakedDate, weekendDays);
   }
