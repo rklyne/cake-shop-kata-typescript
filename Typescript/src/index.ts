@@ -26,11 +26,18 @@ type OrderWork = {
   decoratingDays: number;
   bakingDays: number;
   boxingDays: number;
+  nutsDays: number;
   today: Date;
 };
 
 function newOrder(today: Date, order: Order): OrderWork {
-  const work = { decoratingDays: 0, bakingDays: 0, today, boxingDays: 0 };
+  const work = {
+    decoratingDays: 0,
+    bakingDays: 0,
+    today,
+    boxingDays: 0,
+    nutsDays: 0,
+  };
   work.bakingDays += {
     small: 2,
     big: 3,
@@ -43,6 +50,9 @@ function newOrder(today: Date, order: Order): OrderWork {
   }
   if (order.frosting) {
     work.decoratingDays += 2;
+  }
+  if (order.nuts) {
+    work.nutsDays = 1;
   }
   return work;
 }
@@ -68,6 +78,10 @@ function subtractOneDayWork(work: OrderWork) {
     if (SandroWorkDays.includes(work.today.getDay())) {
       work.decoratingDays -= 1;
     }
+  } else if (work.nutsDays) {
+    if (MarcoWorkDays.includes(work.today.getDay())) {
+      work.nutsDays -= 1;
+    }
   }
 
   if (work.boxingDays) {
@@ -77,10 +91,15 @@ function subtractOneDayWork(work: OrderWork) {
 
 function doWork(work: OrderWork) {
   const workIsDone = () => {
-    return !(work.bakingDays || work.boxingDays || work.decoratingDays)
-  }
+    return !(
+      work.bakingDays ||
+      work.boxingDays ||
+      work.decoratingDays ||
+      work.nutsDays
+    );
+  };
 
-  while(!workIsDone()) {
+  while (!workIsDone()) {
     subtractOneDayWork(work);
   }
 
