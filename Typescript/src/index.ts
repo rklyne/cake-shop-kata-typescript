@@ -33,9 +33,13 @@ export function orderDue(order: Order): DateString {
   }
   const weekendDays = 2;
   const MarcoWorkDays = [1, 2, 3, 4, 5];
+  const SandroWorkDays = [2, 3, 4, 5, 6];
 
   let bakedDate = addDays(new Date(order.placed), bakingDays);
   if (!MarcoWorkDays.includes(bakedDate.getDay())) {
+    bakedDate = addDays(bakedDate, weekendDays);
+  }
+  if (order.frosting && !SandroWorkDays.includes(bakedDate.getDay())) {
     bakedDate = addDays(bakedDate, weekendDays);
   }
 
