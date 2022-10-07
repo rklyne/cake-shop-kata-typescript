@@ -70,16 +70,18 @@ function subtractOneDayWork(work: OrderWork) {
   const SandroWorkDays = [2, 3, 4, 5, 6];
 
   work.today = addDays(work.today, 1);
+  const marcoIsWorking = MarcoWorkDays.includes(work.today.getDay())
+  const sandroIsWorking = SandroWorkDays.includes(work.today.getDay())
   if (work.bakingDays) {
-    if (MarcoWorkDays.includes(work.today.getDay())) {
+    if (marcoIsWorking) {
       work.bakingDays -= 1;
     }
   } else if (work.decoratingDays) {
-    if (SandroWorkDays.includes(work.today.getDay())) {
+    if (sandroIsWorking) {
       work.decoratingDays -= 1;
     }
   } else if (work.nutsDays) {
-    if (MarcoWorkDays.includes(work.today.getDay())) {
+    if (marcoIsWorking) {
       work.nutsDays -= 1;
     }
   }
