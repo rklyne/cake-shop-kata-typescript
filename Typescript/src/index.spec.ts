@@ -112,4 +112,12 @@ describe("gift boxes have a 3 day lead time, independent of baking", () => {
       Friday
     );
   });
+
+  test("a small gift wrapped cake ordered Tuesday morning is delivered on Friday", () => {
+    const Tuesday = "2022-10-11";
+    const Friday = "2022-10-14";
+    expect(
+      orderDue({ placed: Tuesday, size: SMALL, giftWrap: true, morning: true })
+    ).toBe(Friday);
+  });
 });
