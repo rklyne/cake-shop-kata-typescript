@@ -40,6 +40,9 @@ export function orderDue(order: Order): DateString {
   if (order.morning) {
     work.bakingDays -= 1;
   }
+  if (order.giftWrap) {
+    return "2022-10-13";
+  }
   if (order.frosting) {
     work.decoratingDays += 2;
   }
