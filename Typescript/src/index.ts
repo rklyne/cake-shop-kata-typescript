@@ -9,6 +9,7 @@ type Order = {
   morning?: boolean;
   frosting?: boolean;
   giftWrap?: boolean;
+  nuts?: boolean;
 };
 
 function formatDate(date: Date) {

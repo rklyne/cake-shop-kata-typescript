@@ -135,3 +135,15 @@ describe("gift boxes have a 3 day lead time, independent of baking", () => {
     ).toBe(Saturday);
   });
 });
+
+test("nuts are done by Marco", () => {
+    const Tuesday = "2022-10-04";
+    const Monday = "2022-10-10";
+
+  expect(orderDue({
+    placed: Tuesday,
+    size: SMALL,
+    frosting: true,
+    nuts: true,
+  })).toBe(Monday)
+})
