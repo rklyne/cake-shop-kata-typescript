@@ -7,6 +7,7 @@ type Order = {
   size: Size;
   placed: DateString;
   morning: boolean;
+  frosting?: boolean;
 };
 
 function formatDate(date: Date) {

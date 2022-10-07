@@ -65,3 +65,18 @@ describe("orders in the morning start same day", () => {
     expect(orderDue(order)).toBe(Wednesday);
   });
 });
+
+describe("custom frosting takes 2 days", () => {
+  test("a small cake with frosting ordered on Monday morning is ready on Thursday", () => {
+    const Monday = "2022-10-10";
+    const Thursday = "2022-10-13";
+    expect(
+      orderDue({
+        placed: Monday,
+        size: SMALL,
+        morning: true,
+        frosting: true,
+      })
+    ).toBe(Thursday);
+  });
+});
