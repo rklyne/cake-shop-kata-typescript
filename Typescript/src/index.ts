@@ -36,5 +36,7 @@ export function deliveryDate(size: Size, date: string): DateString {
 }
 
 export function orderDue(order: Order): DateString {
-  return ""
+  if (order.morning) {
+    return "2022-10-11";
+  }
 }

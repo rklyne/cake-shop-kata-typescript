@@ -45,4 +45,4 @@ test("orders in the morning start same day", () => {
     morning: true,
   };
   expect(orderDue(order)).toBe(Tuesday);
-})
+});
