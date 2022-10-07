@@ -13,7 +13,7 @@ describe("one small cake", () => {
   test("ordered on Tuesday, is delivered on Thursday", () => {
     const Tuesday = "2022-10-11";
     const Thursday = "2022-10-13";
-    const result = deliveryDate(order, Tuesday);
+    const result = orderDue({ size: order, placed: Tuesday, morning: false });
     expect(result).toBe(Thursday);
   });
 });
@@ -21,11 +21,15 @@ describe("one small cake", () => {
 test("marco only bakes Monday - Friday", () => {
   const Thursday = "2022-10-06";
   const Monday = "2022-10-10";
-  expect(deliveryDate(SMALL, Thursday)).toBe(Monday);
+  expect(orderDue({ size: SMALL, placed: Thursday, morning: false })).toBe(
+    Monday
+  );
 
   const Friday = "2022-10-07";
   const Tuesday = "2022-10-11";
-  expect(deliveryDate(SMALL, Friday)).toBe(Tuesday);
+  expect(orderDue({ size: SMALL, placed: Friday, morning: false })).toBe(
+    Tuesday
+  );
 });
 
 test("big cakes take 3 days", () => {
@@ -33,7 +37,9 @@ test("big cakes take 3 days", () => {
 
   const Monday = "2022-10-10";
   const Thursday = "2022-10-13";
-  expect(deliveryDate(order, Monday)).toBe(Thursday);
+  expect(orderDue({ size: order, placed: Monday, morning: false })).toBe(
+    Thursday
+  );
 });
 
 describe("orders in the morning start same day", () => {
