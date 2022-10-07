@@ -25,8 +25,12 @@ type OrderWork = {
   bakingDays: number;
 };
 
+function newOrder(): OrderWork {
+  return { decoratingDays: 0, bakingDays: 0 };
+}
+
 export function orderDue(order: Order): DateString {
-  let work: OrderWork = { decoratingDays: 0, bakingDays: 0 };
+  const work: OrderWork = newOrder();
   work.bakingDays += {
     small: 2,
     big: 3,
