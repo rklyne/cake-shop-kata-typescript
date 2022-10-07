@@ -28,8 +28,9 @@ export function orderDue(order: Order): DateString {
   if (order.morning) {
     bakingDays -= 1;
   }
+  let decoratingDays = 0;
   if (order.frosting) {
-    bakingDays += 2;
+    decoratingDays += 2;
   }
   const weekendDays = 2;
   const MarcoWorkDays = [1, 2, 3, 4, 5];
@@ -39,8 +40,11 @@ export function orderDue(order: Order): DateString {
   if (!MarcoWorkDays.includes(bakedDate.getDay())) {
     bakedDate = addDays(bakedDate, weekendDays);
   }
-  if (order.frosting && !SandroWorkDays.includes(bakedDate.getDay())) {
-    bakedDate = addDays(bakedDate, weekendDays);
+  if (decoratingDays) {
+    bakedDate = addDays(bakedDate, decoratingDays);
+    if (order.frosting && !SandroWorkDays.includes(bakedDate.getDay())) {
+      bakedDate = addDays(bakedDate, weekendDays);
+    }
   }
 
   return formatDate(bakedDate);
