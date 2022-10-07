@@ -15,10 +15,10 @@ export function deliveryDate(size: Size, date: string) {
     small: 2,
     big: 3,
   }[size];
-  const weekends = [6, 0];
+  const MarcoWorkDays = [1, 2, 3, 4, 5];
 
   let bakedDate = addDays(new Date(date), bakingDays);
-  if (weekends.includes(bakedDate.getDay())) {
+  if (!MarcoWorkDays.includes(bakedDate.getDay())) {
     bakedDate = addDays(bakedDate, bakingDays);
   }
 
