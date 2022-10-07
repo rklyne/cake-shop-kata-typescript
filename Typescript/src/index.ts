@@ -81,17 +81,17 @@ class BakingProgress {
     }
   }
 
-  doWork() {
-    const workIsDone = () => {
-      return !(
-        this.bakingDays ||
-        this.boxingDays ||
-        this.decoratingDays ||
-        this.nutsDays
-      );
-    };
+  workIsDone() {
+    return !(
+      this.bakingDays ||
+      this.boxingDays ||
+      this.decoratingDays ||
+      this.nutsDays
+    );
+  }
 
-    while (!workIsDone()) {
+  doWork() {
+    while (!this.workIsDone()) {
       this.subtractOneDayWork();
     }
 
